@@ -21,21 +21,19 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-          cache-dependency-path: DateInvite/DateInvite/client/package-lock.json
+          cache-dependency-path: DateInvite/DateInvite/package-lock.json
       
       - name: Install dependencies
-        run: |
-          cd DateInvite/DateInvite/client
-          npm ci
+        working-directory: DateInvite/DateInvite
+        run: npm ci
       
       - name: Build project
-        run: |
-          cd DateInvite/DateInvite/client
-          npm run build
+        working-directory: DateInvite/DateInvite
+        run: npm run build
       
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./DateInvite/DateInvite/client/build
+          publish_dir: ./DateInvite/DateInvite/dist/public
           publish_branch: gh-pages
